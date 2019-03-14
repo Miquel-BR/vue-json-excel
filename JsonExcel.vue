@@ -61,9 +61,9 @@ export default {
     meta: {
       type: Array,
       default: () => []
-    }, 
+    },
     worksheet: {
-      type: String, 
+      type: String,
       default: "Sheet1"
     },
     //event before generate was called
@@ -74,6 +74,10 @@ export default {
     beforeFinish:{
       type: Function,
     },
+	separator:{
+    	type: String,
+		default: ","
+	}
   },
   computed: {
     // unique identifier
@@ -111,7 +115,7 @@ export default {
         );
       } else if (this.type === "csv") {
         return this.export(
-          this.jsonToCSV(json),
+          this.jsonToCSV(json, this.separator),
           this.name.replace(".xls", ".csv"),
           "application/csv"
         );
@@ -189,8 +193,10 @@ export default {
 		---------------
 		Transform json data into an CSV file.
 		*/
-    jsonToCSV(data) {
+    jsonToCSV(data, separator) {
       var csvData = [];
+
+      console.log("SEPARATOR: ", separator);
       //Header
       if (this.title != null) {
         csvData.push(this.parseExtraData(this.title, "${data}\r\n"));
@@ -273,17 +279,17 @@ export default {
       const field = typeof key   !== "object" ? key : key.field;
       let indexes = typeof field !== "string" ? []  : field.split(".");
       let value   = this.defaultValue;
-    
+
       if (!field)
 	      value = item;
       else if( indexes.length > 1 )
         value = this.getValueFromNestedItem(item, indexes);
       else
         value = this.parseValue(item[field]);
-      
+
       if( key.hasOwnProperty('callback'))
         value = this.getValueFromCallback(value, key.callback);
-      
+
       return value;
     },
 
