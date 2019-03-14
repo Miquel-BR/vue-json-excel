@@ -6,6 +6,8 @@ Download your JSON data as an excel file directly from the browser. This compone
 
 **The method implemented in this component use HTML tables to draw the .xls files, Microsoft Excel no longer recognize HTML as native content so will prompt a warning message before open the file. The content will be rendered perfectly but the message can't be avoid.**
 
+### Fork
+Fork for add 'separator' attrib on type csv
 
 ## Getting started
 
@@ -47,7 +49,7 @@ In your template
 | fetch  | Function | Callback to fetch data before download, if it's set it runs immediately after mouse pressed and before download process. IMPORTANT: only works if no data prop is defined |
 | before-generate  | Function | Callback to call a method right before the generate / fetch data, eg:show loading progress |
 | before-finish  | Function | Callback to call a method right before the download box pops out, eg:hide loading progress |
-
+| separator  | string | String separator fields when type are 'csv', default: ',' |
 
 ## Example
 
