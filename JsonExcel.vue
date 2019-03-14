@@ -195,9 +195,7 @@ export default {
 		*/
     jsonToCSV(data, separator) {
       var csvData = [];
-
-      console.log("SEPARATOR: ", separator);
-      //Header
+		//Header
       if (this.title != null) {
         csvData.push(this.parseExtraData(this.title, "${data}\r\n"));
       }
@@ -216,7 +214,7 @@ export default {
             escapedCSV = '"' + escapedCSV.replace(/\"/g, '""') + '"';
           }
           csvData.push(escapedCSV);
-          csvData.push(",");
+          csvData.push(separator);
         }
         csvData.pop();
         csvData.push("\r\n");
